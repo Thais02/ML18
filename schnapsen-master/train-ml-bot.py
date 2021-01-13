@@ -2,8 +2,6 @@
 Train a machine learning model for the classifier bot. We create a player, and watch it play games against itself.
 Every observed state is converted to a feature vector and labeled with the eventual outcome
 (-1.0: player 2 won, 1.0: player 1 won)
-
-This is part of the second worksheet.
 """
 from api import State, util
 import pickle
@@ -20,10 +18,16 @@ import joblib
 
 from bots.rand import rand
 # from bots.rdeep import rdeep
-
 from bots.ml.ml import features
 
-def create_dataset(path, player=rand.Bot(), games=2000, phase=1):
+TRAINING_BOT = rand.Bot()
+AMOUNT_OF_GAMES = 2000
+STARTING_PHASE = 1
+DATASET_PATH = "dataset.pkl"
+MODEL_PATH = "model.pkl"
+
+
+def create_dataset(path, player=TRAINING_BOT, games=AMOUNT_OF_GAMES, phase=STARTING_PHASE):
     """Create a dataset that can be used for training the ML bot model.
     The dataset is created by having the player (bot) play games against itself.
     The games parameter indicates how many games will be started.
@@ -36,7 +40,7 @@ def create_dataset(path, player=rand.Bot(), games=2000, phase=1):
     path -- the pathname where the dataset is to be stored
     player -- the player which will play against itself, default the rand Bot
     games -- the number of games to play, default 2000
-    phase -- wheter to start the games in phase 1, the default, or phase 2
+    phase -- whether to start the games in phase 1, the default, or phase 2
     """ 
     
     data = []
@@ -100,12 +104,12 @@ parser = ArgumentParser()
 parser.add_argument("-d", "--dset-path",
                     dest="dset_path",
                     help="Optional dataset path",
-                    default="dataset.pkl")
+                    default=DATASET_PATH)
 
 parser.add_argument("-m", "--model-path",
                     dest="model_path",
                     help="Optional model path. Note that this path starts in bots/ml/ instead of the base folder, like dset_path above.",
-                    default="model.pkl")
+                    default=MODEL_PATH)
 
 parser.add_argument("-o", "--overwrite",
                     dest="overwrite",
@@ -121,7 +125,7 @@ parser.add_argument("--no-train",
 options = parser.parse_args()
 
 if options.overwrite or not os.path.isfile(options.dset_path):
-    create_dataset(options.dset_path, player=rand.Bot(), games=10000)
+    create_dataset(options.dset_path, player=TRAINING_BOT, games=AMOUNT_OF_GAMES)
 
 if options.train:
 
@@ -166,7 +170,7 @@ if options.train:
     print('instances per class: {}'.format(count))
 
     # Store the model in the ml directory
-    joblib.dump(model, "./bots/ml/" + options.model_path)
+    joblib.dump(model, "./bots/OURBOT/" + options.model_path) # TODO
 
     end = time.time()
 
