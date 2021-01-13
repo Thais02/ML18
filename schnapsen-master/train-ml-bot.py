@@ -16,11 +16,10 @@ import sklearn.linear_model
 from sklearn.neural_network import MLPClassifier
 import joblib
 
-from bots.rand import rand
-# from bots.rdeep import rdeep
+from bots.rdeep import rdeep
 from bots.ml.ml import features
 
-TRAINING_BOT = rand.Bot()
+TRAINING_BOT = rdeep.Bot()
 AMOUNT_OF_GAMES = 2000
 STARTING_PHASE = 1
 DATASET_PATH = "dataset.pkl"
