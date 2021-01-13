@@ -1,0 +1,9 @@
+
+
+
+Hoeveel slagen gewonnen kunnen worden aan de hand van tegenstander's kaarten (fase 1 vs fase 2, assumption?)
+Totale punten kaarten in hand (- hand tegenstander)
+hoeveelheid troefkaarten in hand (- hand tegenstander)
+boer van troef in hand? (voor wisselen in fase 1)
+hoeveelheid marriages in hand (- marriages van tegenstander)
+
