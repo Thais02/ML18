@@ -17,7 +17,7 @@ from sklearn.neural_network import MLPClassifier
 import joblib
 
 from bots.rdeep import rdeep
-from bots.OURBOT.OURBOT import features
+from bots.ourbot.ourbot import features
 
 TRAINING_BOT = rdeep.Bot()
 AMOUNT_OF_GAMES = 2000
