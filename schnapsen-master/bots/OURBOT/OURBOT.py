@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-A basic adaptive bot. This is part of the third worksheet.
+By group 18
 
 """
 
@@ -13,6 +13,7 @@ import joblib
 # Path of the model we will use. If you make a model
 # with a different name, point this line to its path.
 DEFAULT_MODEL = os.path.dirname(os.path.realpath(__file__)) + '/model.pkl'
+
 
 class Bot:
 
@@ -95,6 +96,22 @@ def maximizing(state):
     return state.whose_turn() == 1
 
 
+def feature_card_points(state):     # Total value of cards in hand
+    total_points = 0
+    for card in state.hand():
+        if card in [0, 5, 10, 15]:      # aces
+            total_points += 11
+        elif card in [1, 6, 11, 16]:    # 10s
+            total_points += 10
+        elif card in [2, 7, 12, 17]:    # kings
+            total_points += 4
+        elif card in [3, 8, 13, 18]:    # queens
+            total_points += 3
+        else:                           # jacks
+            total_points += 2
+    return total_points
+
+
 def features(state):
     # type: (State) -> tuple[float, ...]
     """
@@ -103,7 +120,7 @@ def features(state):
     :param state: A state to be converted to a feature vector
     :return: A tuple of floats: a feature vector representing this state.
     """
-
+    feature_card_points(state)  # TODO
     feature_set = []
 
     # Add player 1's points to feature set
@@ -137,7 +154,8 @@ def features(state):
     opponents_played_card = state.get_opponents_played_card()
 
 
-    ################## You do not need to do anything below this line ########################
+    # our added features
+    feature_set.append(feature_card_points(state))
 
     perspective = state.get_perspective()
 

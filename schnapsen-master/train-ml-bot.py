@@ -17,14 +17,14 @@ from sklearn.neural_network import MLPClassifier
 import joblib
 
 from bots.rdeep import rdeep
-from bots.OURBOT.OURBOT import features
+from bots.ourbot.ourbot import features
 
 TRAINING_BOT = rdeep.Bot()
 AMOUNT_OF_GAMES = 2000
 STARTING_PHASE = 1
-DATASET_PATH = "bots/OURBOT/dataset.pkl"
+DATASET_PATH = "bots/ourbot/dataset.pkl"
 MODEL_PATH = "model.pkl"
-
+OVERWRITE = True
 
 def create_dataset(path, player=TRAINING_BOT, games=AMOUNT_OF_GAMES, phase=STARTING_PHASE):
     """Create a dataset that can be used for training the ML bot model.
@@ -123,7 +123,7 @@ parser.add_argument("--no-train",
 
 options = parser.parse_args()
 
-if options.overwrite or not os.path.isfile(options.dset_path):
+if options.overwrite or OVERWRITE or not os.path.isfile(options.dset_path):
     create_dataset(options.dset_path, player=TRAINING_BOT, games=AMOUNT_OF_GAMES)
 
 if options.train:
