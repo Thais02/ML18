@@ -111,6 +111,14 @@ def feature_card_points(state):     # Total value of cards in hand
             total_points += 2
     return total_points
 
+def feature_trump_cards(state):
+    res = 0
+    for card in state.hand():
+        if card.get_suit == state.get_trump_suit():
+            res += 1
+            
+    return res
+
 
 def features(state):
     # type: (State) -> tuple[float, ...]
@@ -155,7 +163,11 @@ def features(state):
 
 
     # our added features
+    # total points in hand
     feature_set.append(feature_card_points(state))
+    
+    # amount of trump cards in hand
+    feature_set.append(feature_trump_cards(state))
 
     perspective = state.get_perspective()
 
