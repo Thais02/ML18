@@ -109,6 +109,7 @@ def feature_card_points(state):     # Total value of cards in hand
             total_points += 3
         else:                           # jacks
             total_points += 2
+    
     return total_points
 
 def feature_trump_cards(state):
@@ -118,6 +119,14 @@ def feature_trump_cards(state):
             res += 1
             
     return res
+
+def check_trump_jack(state):
+    result = 0
+    for card in state.hand():
+        if card.get_suit == state.get_trump_suit() and card.get_index in [4, 9, 14, 19]:
+            result += 1
+
+    return result
 
 
 def features(state):
@@ -168,6 +177,9 @@ def features(state):
     
     # amount of trump cards in hand
     feature_set.append(feature_trump_cards(state))
+    
+    # one-hot encoded if bot has trump jack in hand
+    feature_set += [1, 0] if check_trump_jack(state) == 1 else [0, 1]
 
     perspective = state.get_perspective()
 
