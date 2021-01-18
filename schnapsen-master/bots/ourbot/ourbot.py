@@ -87,6 +87,7 @@ class Bot:
 
         return res
 
+
 def maximizing(state):
     """
     Whether we're the maximizing player (1) or the minimizing player (2).
@@ -112,20 +113,29 @@ def feature_card_points(state):     # Total value of cards in hand
     
     return total_points
 
+
 def feature_trump_cards(state):
     res = 0
     for card in state.hand():
-        if card.get_suit == state.get_trump_suit():
+        if util.get_suit(card) == state.get_trump_suit():
             res += 1
-            
     return res
+
 
 def check_trump_jack(state):
     result = 0
     for card in state.hand():
-        if card.get_suit == state.get_trump_suit() and card.get_index in [4, 9, 14, 19]:
+        if util.get_suit(card) == state.get_trump_suit() and card in [4, 9, 14, 19]:
             result += 1
+    return result
 
+
+def check_marriages(state):
+    result = 0
+    if state.whose_turn == 1:
+        for move in state.moves():
+            if move[0].is_integer and move[1].is_integer:
+                result += 1
     return result
 
 
@@ -180,6 +190,10 @@ def features(state):
     
     # one-hot encoded if bot has trump jack in hand
     feature_set += [1, 0] if check_trump_jack(state) == 1 else [0, 1]
+
+    # amount of marriages in hand
+    feature_set.append(check_marriages(state))
+
 
     perspective = state.get_perspective()
 
