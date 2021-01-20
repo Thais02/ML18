@@ -110,7 +110,6 @@ def feature_card_points(state):     # Total value of cards in hand
             total_points += 3
         else:                           # jacks
             total_points += 2
-    
     return total_points
 
 
@@ -159,7 +158,7 @@ def features(state):
     # Add player 1's pending points to feature set
     p1_pending_points = state.get_pending_points(1)
 
-    # Add plauer 2's pending points to feature set
+    # Add player 2's pending points to feature set
     p2_pending_points = state.get_pending_points(2)
 
     # Get trump suit
@@ -193,6 +192,12 @@ def features(state):
 
     # amount of marriages in hand
     feature_set.append(check_marriages(state))
+
+    # points ratio
+    feature_set.append(util.ratio_points(state, 1))
+
+    # difference in points between player 1 and 2
+    feature_set.append(util.difference_points(state, 1))
 
 
     perspective = state.get_perspective()
