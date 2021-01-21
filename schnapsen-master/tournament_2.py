@@ -8,6 +8,8 @@ verbose = False
 myphase = 1
 myrepeats = 100
 filename = "tournament_results__"   # .txt
+start_seed = 69420
+seed_interval = 21
 
 # create new output file
 filenumber = 1
@@ -44,8 +46,12 @@ for a, b in matches:
         else:
             p = [b, a]
 
+        # generate modified seed
+        seed = start_seed + seed_interval * (playedgames + 1)
+        file.write("seed: " + str(seed) + "\t\t")
+
         # Generate a state with a random seed
-        state = State.generate(phase=myphase)
+        state = State.generate(phase=myphase, id=seed)
 
         winner, score = engine.play(bots[p[0]], bots[p[1]], state, 1000, verbose, True)
 
