@@ -5,11 +5,10 @@ from os import path
 from argparse import ArgumentParser
 
 
-def run():
+def run(botnames, myrepeats):
     verbose = False
     myphase = 1
-    myrepeats = 100
-    filename = "tournament_results__"   # .txt
+    filename = "tournament_results/tournament_results__"   # .txt
     start_seed = 69420
     seed_interval = 21
 
@@ -98,6 +97,6 @@ if __name__ == "__main__":
                         help="How many matches to play for each pair of bots",
                         type=int, default=100)
 
-    botnames = parser.parse_args().players.split(",")
-    myrepeats = parser.parse_args().repeats
-    run()
+    arg_botnames = parser.parse_args().players.split(",")
+    arg_repeats = parser.parse_args().repeats
+    run(arg_botnames, arg_repeats)
