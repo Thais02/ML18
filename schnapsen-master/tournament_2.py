@@ -3,7 +3,7 @@ from api import State, engine, util
 from scipy import stats
 from os import path
 
-botnames = ["ourbot", "rdeep"]
+botnames = ["ourbot", "ml"]
 verbose = False
 myphase = 1
 myrepeats = 100
