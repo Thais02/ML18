@@ -1,6 +1,7 @@
 import sys, random
 from api import State, engine, util
 from scipy import stats
+import os
 from os import path
 from argparse import ArgumentParser
 
@@ -8,6 +9,7 @@ from argparse import ArgumentParser
 def run(botnames, myrepeats):
     verbose = False
     myphase = 1
+    os.makedirs("tournament_results", exist_ok=True)
     filename = "tournament_results/tournament_results__"   # .txt
     start_seed = 69420
     seed_interval = 21
