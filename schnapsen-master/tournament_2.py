@@ -93,6 +93,11 @@ if __name__ == "__main__":
                         dest="players",
                         help="Comma-separated list of player names (enclose with quotes).",
                         default="ourbot,rdeep")
+    parser.add_argument("-r", "--repeats",
+                        dest="repeats",
+                        help="How many matches to play for each pair of bots",
+                        type=int, default=100)
 
     botnames = parser.parse_args().players.split(",")
+    myrepeats = parser.parse_args().repeats
     run()
