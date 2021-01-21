@@ -19,6 +19,7 @@ while path.exists(new_filename):
     new_filename = filename + str(filenumber) + ".txt"
 file = open(new_filename, "w")
 
+file.write("start_seed=%s & seed_interval=%s\n" % (start_seed, seed_interval))
 # Create players
 bots = []
 for bot in botnames:
