@@ -98,7 +98,14 @@ if __name__ == "__main__":
                         dest="repeats",
                         help="How many matches to play for each pair of bots",
                         type=int, default=100)
+    parser.add_argument("-a",
+                        dest="runs",
+                        help="How many tournaments are ran",
+                        type=int, default=1)
 
     arg_botnames = parser.parse_args().players.split(",")
     arg_repeats = parser.parse_args().repeats
-    run(arg_botnames, arg_repeats)
+    arg_runs = parser.parse_args().runs
+
+    for i in range(0, arg_runs):
+        run(arg_botnames, arg_repeats)

@@ -18,6 +18,7 @@ import joblib
 
 from bots.rdeep import rdeep
 from bots.ourbot.ourbot import features
+#from bots.ml.ml import features
 
 TRAINING_BOT = rdeep.Bot()
 AMOUNT_OF_GAMES = 2000
@@ -25,6 +26,8 @@ STARTING_PHASE = 1
 DATASET_PATH = "bots/ourbot/dataset.pkl"
 MODEL_PATH = "model.pkl"
 OVERWRITE = True
+SEED = 246816
+
 
 def create_dataset(path, player=TRAINING_BOT, games=AMOUNT_OF_GAMES, phase=STARTING_PHASE):
     """Create a dataset that can be used for training the ML bot model.
@@ -59,7 +62,7 @@ def create_dataset(path, player=TRAINING_BOT, games=AMOUNT_OF_GAMES, phase=START
             sys.stdout.flush()
 
         # Randomly generate a state object starting in specified phase.
-        state = State.generate(phase=phase)
+        state = State.generate(phase=phase, id=SEED)
 
         state_vectors = []
 
@@ -169,7 +172,7 @@ if options.train:
     print('instances per class: {}'.format(count))
 
     # Store the model in the ml directory
-    joblib.dump(model, "./bots/OURBOT/" + options.model_path) # TODO
+    joblib.dump(model, "./bots/ourbot/" + options.model_path) # TODO
 
     end = time.time()
 
