@@ -75,8 +75,8 @@ def run(botnames, myrepeats):
         print('    bot {}: {} points'.format(botnames[i], total_points[i]))
         file.write('bot {}: {} points\n'.format(botnames[i], total_points[i]))
         if i == 0:
-            binom_test = stats.binom_test(wins[i], n=playedgames, p=0.5, alternative="greater")
-            file.write("    wins(x)=%s, playedgames(n)=%s, p=0.5, alternative=greater\n" % (wins[i], playedgames))
+            binom_test = stats.binom_test(total_points[i], n=total_points[0]+total_points[1], p=0.5, alternative="greater")
+            file.write("    wins(x)=%s, total_points(n)=%s, p=0.5, alternative=greater\n" % (wins[i], str(total_points[0]+total_points[1])))
             print("        Binomial test result: " + str(binom_test))
             file.write("    Binomial test result: " + str(binom_test) + "\n")
             if binom_test < 0.05:
